@@ -1,0 +1,80 @@
+###############################################
+# NodeJS-Authentication-System .gitignore
+# Ignore dependencies, env files, logs, caches,
+# editor settings, and build artifacts.
+# Keep .env.example and public/results tracked.
+###############################################
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Process id files
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime data
+*.seed
+.cache/
+
+# Coverage and test output
+coverage/
+.nyc_output/
+
+# Build output
+dist/
+build/
+tmp/
+temp/
+.parcel-cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Node REPL history
+.node_repl_history
+
+# Package manager caches
+.npm/
+.pnpm-store/
+.yarn-cache/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# OS-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Editor/IDE
+.idea/
+*.iml
+
+# VS Code - ignore folder but allow common workspace files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# TypeScript build info (if ever used)
+*.tsbuildinfo
+
+# Keep screenshots/results tracked
+# (Do not add public/results to ignores)
+
