@@ -54,6 +54,32 @@ export  class UserPostController {
     //sign up
     createUser = async (req, res) => {
         const { username, email, password,cpassword } = req.body;
+        // Recaptcha: must be checked
+        const recaptcha = req.body['g-recaptcha-response'];
+        if (recaptcha === undefined || recaptcha === '' || recaptcha === null) {
+            return res.status(400).render("signup", { message: "Please select captcha" });
+        }
+        // Optional: verify with Google if backend secret is configured and fetch is available
+        try {
+            const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+            if (secretKey && typeof fetch === 'function') {
+                const params = new URLSearchParams();
+                params.append('secret', secretKey);
+                params.append('response', recaptcha);
+                const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
+                    body: params.toString()
+                });
+                const data = await verifyRes.json();
+                if (!data.success) {
+                    return res.status(400).render("signup", { message: "Captcha verification failed" });
+                }
+            }
+        } catch (e) {
+            // If verification call fails (e.g., offline), be conservative in development: treat as not verified
+            return res.status(400).render("signup", { message: "Captcha verification error" });
+        }
         if (password !== cpassword) {
             return res.status(400).render("signup",{message:"Passwords don't match"});
         }
