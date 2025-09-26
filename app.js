@@ -92,4 +92,3 @@ app.use(express.static("public"));
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
-  // first commit marker for GitHub folder summary lines
